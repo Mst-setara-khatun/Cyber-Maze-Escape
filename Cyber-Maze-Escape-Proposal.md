@@ -4,7 +4,7 @@
 
 **Course:** Computer Graphics and Multimedia System
 **Project Type:** Individual Game Development Project
-**Developer:** Setara Khatun
+**Developer:** MST. SETARA KHATUN
 **Technology:** Python and Pygame-CE
 **Project Duration:** 6 Weeks
 
@@ -165,5 +165,6 @@ Through six weeks of development, the project will gradually introduce six major
 ---
 
 **Project:** Cyber Maze Escape  
-**Developer:** Setara Khatun  
+**Developer:** MST. SETARA KHATUN  
 **Duration:** 6 Weeks
+

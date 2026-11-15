@@ -20,7 +20,8 @@ The player will explore a mysterious cyber world, solve maze challenges and find
 - Pygame-CE 2.5.8
 
 ## Developer
-Setara Khatun
+MST. SETARA KHATUN
 
 ## Project Status
 Week 1 - Main Menu Development Completed.
+
