@@ -1,255 +1,414 @@
 ﻿import pygame
 import sys
 import math
-import random
+from pathlib import Path
+from game_engine import CyberMaze
 
 pygame.init()
 
-WIDTH, HEIGHT = 1200, 750
+WIDTH, HEIGHT = 1200, 675
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Cyber Maze Escape: A 3D Maze Adventure Game")
+pygame.display.set_caption("Cyber Maze Escape | Cinematic Edition")
 
 clock = pygame.time.Clock()
 
-# Colors
-BG = (5, 7, 20)
-CYAN = (0, 220, 255)
-BLUE = (35, 100, 255)
-PURPLE = (150, 60, 255)
-WHITE = (240, 245, 255)
-MUTED = (120, 145, 180)
+BASE = Path(__file__).resolve().parent
+BG_PATH = BASE / "Assets" / "Backgrounds" / "cinematic_menu.png"
+MUSIC_PATH = BASE / "Assets" / "Backgrounds" / "fantasy_music.wav"
 
-# Fonts
-logo_font = pygame.font.SysFont("consolas", 25, bold=True)
-title_font = pygame.font.SysFont("arial", 66, bold=True)
-subtitle_font = pygame.font.SysFont("arial", 23)
-button_font = pygame.font.SysFont("arial", 22, bold=True)
-small_font = pygame.font.SysFont("consolas", 14)
+background = pygame.image.load(str(BG_PATH)).convert()
+background = pygame.transform.smoothscale(background, (WIDTH, HEIGHT))
 
-# Particles
-particles = [
-    [random.randrange(WIDTH), random.randrange(HEIGHT),
-     random.uniform(0.3, 1.2), random.randint(1, 3)]
-    for _ in range(90)
-]
+# Original artwork button positions preserved
+buttons = {
+    "start": pygame.Rect(135, 286, 370, 70),
+    "help": pygame.Rect(155, 366, 345, 65),
+    "settings": pygame.Rect(155, 428, 345, 65),
+    "exit": pygame.Rect(155, 490, 345, 65),
+}
 
-def text_center(text, font, color, x, y):
-    image = font.render(text, True, color)
-    screen.blit(image, image.get_rect(center=(x, y)))
+# Additional About button
+about_button = pygame.Rect(1060, 22, 115, 38)
 
-def draw_background():
-    screen.fill(BG)
+WHITE = (245, 240, 220)
+GOLD = (230, 190, 115)
+DARK = (5, 18, 12)
+EMERALD = (35, 150, 95)
+MUTED = (175, 190, 180)
 
-    # Gradient background
-    for y in range(HEIGHT):
-        t = y / HEIGHT
-        color = (5 + int(5*t), 7 + int(8*t), 20 + int(20*t))
-        pygame.draw.line(screen, color, (0, y), (WIDTH, y))
+font_title = pygame.font.SysFont("arial", 34, bold=True)
+font_text = pygame.font.SysFont("arial", 19)
+font_small = pygame.font.SysFont("arial", 15)
+font_button = pygame.font.SysFont("arial", 16, bold=True)
 
-    # Background grid
-    for x in range(0, WIDTH, 50):
-        pygame.draw.line(screen, (12, 25, 48), (x, 0), (x, HEIGHT))
+# Music initialization
+music_available = False
+music_enabled = True
+music_volume = 0.35
 
-    for y in range(0, HEIGHT, 50):
-        pygame.draw.line(screen, (12, 25, 48), (0, y), (WIDTH, y))
+try:
+    if not pygame.mixer.get_init():
+        pygame.mixer.init()
 
-    # Moving particles
-    for p in particles:
-        p[1] -= p[2]
-        if p[1] < 0:
-            p[1] = HEIGHT
-            p[0] = random.randrange(WIDTH)
+    pygame.mixer.music.load(str(MUSIC_PATH))
+    pygame.mixer.music.set_volume(music_volume)
+    pygame.mixer.music.play(-1)
+    music_available = True
 
-        pygame.draw.circle(
-            screen, (0, 115, 175),
-            (int(p[0]), int(p[1])), p[3]
-        )
+except pygame.error as error:
+    print("Music could not start:", error)
 
-    # Scan line
-    scan_y = int((pygame.time.get_ticks() * 0.08) % HEIGHT)
-    pygame.draw.line(
-        screen, (10, 35, 65),
-        (0, scan_y), (WIDTH, scan_y), 2
-    )
-
-def draw_portal():
-    cx, cy = 870, 365
-    pulse = math.sin(pygame.time.get_ticks() * 0.003)
-
-    # Portal glow rings
-    for i in range(5, 0, -1):
-        radius = 145 + i * 12 + int(pulse * 4)
-        pygame.draw.circle(
-            screen, (12, 20 + i*3, 55 + i*5),
-            (cx, cy), radius, 2
-        )
-
-    # Portal
-    pygame.draw.ellipse(
-        screen, (15, 35, 80),
-        (cx-110, cy-145, 220, 290)
-    )
-
-    pygame.draw.ellipse(
-        screen, PURPLE,
-        (cx-110, cy-145, 220, 290), 3
-    )
-
-    pygame.draw.ellipse(
-        screen, CYAN,
-        (cx-95, cy-130, 190, 260), 2
-    )
-
-    # Inner portal
-    pygame.draw.ellipse(
-        screen, (8, 20, 55),
-        (cx-80, cy-115, 160, 230)
-    )
-
-    # Futuristic maze illustration
-    maze_lines = [
-        ((cx-55, cy-75), (cx+55, cy-75)),
-        ((cx-55, cy-75), (cx-55, cy+70)),
-        ((cx-55, cy), (cx+35, cy)),
-        ((cx+35, cy), (cx+35, cy+75)),
-        ((cx-55, cy+70), (cx+35, cy+70)),
-        ((cx+35, cy+35), (cx+65, cy+35)),
-    ]
-
-    for start, end in maze_lines:
-        pygame.draw.line(screen, CYAN, start, end, 4)
-
-    # Portal core
-    pygame.draw.circle(screen, BLUE, (cx, cy), 12)
-    pygame.draw.circle(screen, WHITE, (cx, cy), 5)
-
-    # Floating energy dots
-    for i in range(8):
-        angle = pygame.time.get_ticks() * 0.001 + i * math.pi / 4
-        x = cx + math.cos(angle) * 165
-        y = cy + math.sin(angle) * 190
-        pygame.draw.circle(screen, CYAN, (int(x), int(y)), 3)
-
-def draw_button(text, x, y, w, h):
-    rect = pygame.Rect(x, y, w, h)
-    hover = rect.collidepoint(pygame.mouse.get_pos())
-
-    color = CYAN if hover else BLUE
-    fill = (12, 42, 72) if hover else (10, 20, 45)
-
-    pygame.draw.rect(screen, fill, rect, border_radius=9)
-    pygame.draw.rect(screen, color, rect, 2, border_radius=9)
-
-    label = button_font.render(text, True, WHITE)
-    screen.blit(label, label.get_rect(center=rect.center))
-
-    return rect
-
-def draw_interface():
-    draw_background()
-
-    # Header
-    pygame.draw.line(screen, (20, 70, 110),
-                     (45, 75), (1155, 75), 1)
-
-    pygame.draw.circle(screen, CYAN, (65, 42), 14, 3)
-    text_center("CM", logo_font, WHITE, 65, 42)
-
-    logo = logo_font.render("CYBER MAZE", True, WHITE)
-    screen.blit(logo, (95, 29))
-
-    text_center("MAIN MENU", small_font, CYAN, 1050, 42)
-
-    # Left content
-    text_center("WELCOME TO THE FUTURE", small_font,
-                CYAN, 310, 160)
-
-    title = title_font.render("CYBER MAZE", True, WHITE)
-    screen.blit(title, (95, 220))
-
-    title2 = title_font.render("ESCAPE", True, CYAN)
-    screen.blit(title2, (95, 290))
-
-    pygame.draw.rect(screen, PURPLE, (100, 380, 65, 4))
-
-    description = [
-        "A 3D MAZE ADVENTURE GAME",
-        "Enter a mysterious cyber world.",
-        "Solve the maze, collect keys,",
-        "and discover the path to freedom."
-    ]
-
-    for i, line in enumerate(description):
-        color = CYAN if i == 0 else MUTED
-        font = subtitle_font if i == 0 else small_font
-        screen.blit(font.render(line, True, color),
-                    (100, 410 + i * 30))
-
-    # Buttons
-    start = draw_button("START ADVENTURE", 100, 570, 270, 58)
-    exit_btn = draw_button("EXIT GAME", 390, 570, 170, 58)
-
-    # Right portal illustration
-    draw_portal()
-
-    text_center("THE MAZE IS WAITING", small_font,
-                CYAN, 870, 590)
-
-    text_center("EXPLORE  |  SURVIVE  |  ESCAPE",
-                small_font, MUTED, 870, 620)
-
-    # Footer
-    pygame.draw.line(screen, (20, 70, 110),
-                     (45, 690), (1155, 690), 1)
-
-    screen.blit(
-        small_font.render("GAME PROJECT  |  VERSION 1.0",
-                          True, MUTED), (50, 710)
-    )
-
-    screen.blit(
-        small_font.render("POWERED BY PYGAME",
-                          True, CYAN), (1000, 710)
-    )
-
-    return start, exit_btn
-
-running = True
+game = None
 game_started = False
+running = True
+active_panel = None
+
+panel = pygame.Rect(340, 175, 520, 320)
+
+music_toggle_rect = pygame.Rect(465, 275, 270, 42)
+volume_rect = pygame.Rect(460, 365, 280, 12)
+close_rect = pygame.Rect(490, 445, 220, 32)
+
+yes_rect = pygame.Rect(445, 370, 125, 42)
+no_rect = pygame.Rect(630, 370, 125, 42)
+
+
+def draw_text_center(text, font, color, position):
+    image = font.render(text, True, color)
+    screen.blit(image, image.get_rect(center=position))
+
+
+def draw_menu():
+    # Preserve original cinematic artwork
+    screen.blit(background, (0, 0))
+
+    mouse = pygame.mouse.get_pos()
+
+    for rect in buttons.values():
+        if rect.collidepoint(mouse):
+            glow = pygame.Surface(
+                (rect.width, rect.height), pygame.SRCALPHA
+            )
+            pygame.draw.rect(
+                glow, (255, 220, 130, 35),
+                glow.get_rect(), border_radius=12
+            )
+            screen.blit(glow, rect.topleft)
+
+    # Additional About button
+    about_color = GOLD if about_button.collidepoint(mouse) else WHITE
+
+    pygame.draw.rect(
+        screen, (5, 18, 12, 210),
+        about_button, border_radius=8
+    )
+    pygame.draw.rect(
+        screen, GOLD,
+        about_button, 1, border_radius=8
+    )
+
+    draw_text_center(
+        "ABOUT",
+        font_button,
+        about_color,
+        about_button.center
+    )
+
+    if active_panel:
+        draw_panel()
+
+
+def draw_panel():
+    overlay = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)
+    overlay.fill((0, 0, 0, 185))
+    screen.blit(overlay, (0, 0))
+
+    pygame.draw.rect(screen, DARK, panel, border_radius=16)
+    pygame.draw.rect(screen, GOLD, panel, 2, border_radius=16)
+
+    pygame.draw.line(
+        screen, EMERALD,
+        (panel.left + 35, panel.top + 65),
+        (panel.right - 35, panel.top + 65), 2
+    )
+
+    if active_panel == "help":
+
+        draw_text_center(
+            "HOW TO PLAY",
+            font_title, GOLD, (600, 220)
+        )
+
+        lines = [
+            "W / UP       - Move Forward",
+            "S / DOWN     - Move Backward",
+            "A / D        - Move Sideways",
+            "LEFT / RIGHT - Rotate View",
+            "MOUSE        - Look Around",
+            "",
+            "COLLECT ALL 3 KEYS TO UNLOCK THE EXIT",
+            "Each key gives 100 points."
+        ]
+
+        for i, line in enumerate(lines):
+            draw_text_center(
+                line, font_text, WHITE,
+                (600, 275 + i * 24)
+            )
+
+    elif active_panel == "settings":
+
+        draw_text_center(
+            "SETTINGS",
+            font_title, GOLD, (600, 220)
+        )
+
+        music_status = (
+            "MUSIC: ON" if music_enabled else "MUSIC: OFF"
+        )
+
+        pygame.draw.rect(
+            screen, EMERALD,
+            music_toggle_rect, border_radius=8
+        )
+        pygame.draw.rect(
+            screen, GOLD,
+            music_toggle_rect, 1, border_radius=8
+        )
+
+        draw_text_center(
+            music_status,
+            font_text, WHITE,
+            music_toggle_rect.center
+        )
+
+        draw_text_center(
+            f"MUSIC VOLUME: {int(music_volume * 100)}%",
+            font_text, WHITE, (600, 335)
+        )
+
+        pygame.draw.rect(
+            screen, (75, 85, 75),
+            (volume_rect.x, volume_rect.y,
+             volume_rect.width, volume_rect.height),
+            border_radius=6
+        )
+
+        fill_width = int(volume_rect.width * music_volume)
+
+        pygame.draw.rect(
+            screen, GOLD,
+            (volume_rect.x, volume_rect.y,
+             fill_width, volume_rect.height),
+            border_radius=6
+        )
+
+        knob_x = volume_rect.x + fill_width
+
+        pygame.draw.circle(
+            screen, WHITE,
+            (knob_x, volume_rect.centery), 10
+        )
+
+        if not music_available:
+            draw_text_center(
+                "Audio device unavailable",
+                font_small, MUTED, (600, 405)
+            )
+
+    elif active_panel == "about":
+
+        draw_text_center(
+            "ABOUT THE GAME",
+            font_title, GOLD, (600, 220)
+        )
+
+        lines = [
+            "PROJECT: CYBER MAZE ESCAPE",
+            "TYPE: 3D MAZE ADVENTURE GAME",
+            "DEVELOPER: MST. SETARA KHATUN",
+            "TECHNOLOGY: PYTHON + PYGAME-CE",
+            "",
+            "Explore the maze, collect keys and escape!",
+            "PROJECT VERSION: 1.0"
+        ]
+
+        for i, line in enumerate(lines):
+            draw_text_center(
+                line, font_text, WHITE,
+                (600, 275 + i * 27)
+            )
+
+    elif active_panel == "exit":
+
+        draw_text_center(
+            "EXIT GAME?",
+            font_title, GOLD, (600, 245)
+        )
+
+        draw_text_center(
+            "Are you sure you want to leave?",
+            font_text, WHITE, (600, 310)
+        )
+
+        pygame.draw.rect(
+            screen, (100, 35, 30),
+            yes_rect, border_radius=8
+        )
+
+        pygame.draw.rect(
+            screen, EMERALD,
+            no_rect, border_radius=8
+        )
+
+        draw_text_center(
+            "YES", font_button, WHITE, yes_rect.center
+        )
+
+        draw_text_center(
+            "NO", font_button, WHITE, no_rect.center
+        )
+
+    if active_panel != "exit":
+        pygame.draw.rect(
+            screen, EMERALD,
+            close_rect, border_radius=8
+        )
+
+        draw_text_center(
+            "CLOSE",
+            font_button, WHITE,
+            close_rect.center
+        )
+
+
+def set_music_volume(value):
+    global music_volume
+
+    music_volume = max(0.0, min(1.0, value))
+
+    if music_available:
+        pygame.mixer.music.set_volume(
+            music_volume if music_enabled else 0
+        )
+
+
+def handle_volume_click(mouse_x):
+    relative = mouse_x - volume_rect.x
+    value = relative / volume_rect.width
+    set_music_volume(value)
+
 
 while running:
-    start_button, exit_button = draw_interface()
+
+    dt = clock.tick(60) / 1000
+
+    if game_started:
+        game.draw(dt)
+    else:
+        draw_menu()
 
     for event in pygame.event.get():
+
         if event.type == pygame.QUIT:
             running = False
 
-        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-            if not game_started:
-                if start_button.collidepoint(event.pos):
+        if game_started:
+
+            game.mouse_control(event)
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    game_started = False
+                    game = None
+                    pygame.mouse.set_visible(True)
+                    pygame.event.set_grab(False)
+
+        else:
+
+            if event.type == pygame.KEYDOWN:
+
+                if event.key == pygame.K_ESCAPE:
+                    if active_panel:
+                        active_panel = None
+                    else:
+                        active_panel = "exit"
+
+                elif event.key == pygame.K_F1:
+                    active_panel = "about"
+
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+
+                if active_panel == "settings":
+
+                    if music_toggle_rect.collidepoint(event.pos):
+
+                        music_enabled = not music_enabled
+
+                        if music_available:
+                            pygame.mixer.music.set_volume(
+                                music_volume if music_enabled else 0
+                            )
+
+                    elif volume_rect.inflate(0, 25).collidepoint(event.pos):
+                        handle_volume_click(event.pos[0])
+
+                    elif close_rect.collidepoint(event.pos):
+                        active_panel = None
+
+                    else:
+                        pass
+
+                elif active_panel == "exit":
+
+                    if yes_rect.collidepoint(event.pos):
+                        running = False
+
+                    elif no_rect.collidepoint(event.pos):
+                        active_panel = None
+
+                elif active_panel:
+
+                    if close_rect.collidepoint(event.pos):
+                        active_panel = None
+
+                elif about_button.collidepoint(event.pos):
+                    active_panel = "about"
+
+                elif buttons["start"].collidepoint(event.pos):
+
+                    game = CyberMaze(screen)
+                    game.mouse_locked = True
                     game_started = True
 
-                elif exit_button.collidepoint(event.pos):
-                    running = False
+                    pygame.mouse.set_visible(False)
+                    pygame.event.set_grab(True)
+                    pygame.mouse.get_rel()
 
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE:
-                if game_started:
-                    game_started = False
-                else:
-                    running = False
+                elif buttons["help"].collidepoint(event.pos):
+                    active_panel = "help"
 
-    if game_started:
-        screen.fill(BG)
-        text_center("ADVENTURE INITIALIZING",
-                    title_font, CYAN, WIDTH//2, 310)
-        text_center("3D MAZE ENVIRONMENT - COMING NEXT",
-                    subtitle_font, WHITE, WIDTH//2, 380)
-        text_center("PRESS ESC TO RETURN",
-                    small_font, MUTED, WIDTH//2, 440)
+                elif buttons["settings"].collidepoint(event.pos):
+                    active_panel = "settings"
+
+                elif buttons["exit"].collidepoint(event.pos):
+                    active_panel = "exit"
+
+            if event.type == pygame.MOUSEMOTION:
+                if active_panel == "settings" and pygame.mouse.get_pressed()[0]:
+                    if volume_rect.inflate(0, 25).collidepoint(event.pos):
+                        handle_volume_click(event.pos[0])
+
+    if game_started and not game.won:
+        game.movement(dt)
 
     pygame.display.flip()
-    clock.tick(60)
+
+pygame.mouse.set_visible(True)
+pygame.event.set_grab(False)
+
+if music_available:
+    pygame.mixer.music.stop()
 
 pygame.quit()
 sys.exit()
