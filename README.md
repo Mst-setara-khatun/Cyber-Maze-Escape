@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🎮 CYBER MAZE ESCAPE
+#  CYBER MAZE ESCAPE
 
 ### A 3D Maze Adventure Game
 
