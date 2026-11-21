@@ -15,7 +15,7 @@
 
 ---
 
-## 📌 Table of Contents
+ Table of Contents:
 
 - About the Project
 - Game Overview
@@ -32,8 +32,7 @@
 - Developer
 
 ---
-
-## 🎯 About the Project
+ About the Project
 
 **Cyber Maze Escape** is a futuristic 3D-style maze adventure game developed using Python and Pygame-CE.
 
