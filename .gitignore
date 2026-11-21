@@ -1,4 +1,36 @@
-﻿.venv/
+﻿# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+.venv/
+venv/
+
+# IDE
 .vscode/
+.idea/
+
+# Backup files
+*_backup.py
+*_before_*.py
+*.bak
+*.tmp
+
+# Diagnostic and testing files
+diagnose_*.py
+inspect_*.py
+*_diagnostic.py
+*_preview.py
+*_test.py
+test*.py
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Experimental 3D models
+Assets/Models/
+
+# Experimental source and preview files
+game_engine_source.txt
+preview_compatible.py
