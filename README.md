@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
 
 # 🎮 CYBER MAZE ESCAPE
 
@@ -138,18 +138,12 @@ A moving cyber enemy patrols the maze and can damage the player upon collision. 
 CyberMaze/
 │
 ├── Assets/
-│   ├── Backgrounds/
-│   │   ├── cinematic_menu.png
-│   │   ├── fantasy_music.wav
-│   │   ├── gameplay_concept.png
-│   │   ├── gameplay_reference.png
-│   │   └── gameplay_scene.png
-│   │
-│   ├── Models/
-│   │   └── ForestKit/
-│   │
-│   └── University/
-│       └── nubtk_logo.png
+│   └── Backgrounds/
+│       ├── cinematic_menu.png
+│       ├── fantasy_music.wav
+│       ├── gameplay_concept.png
+│       ├── gameplay_reference.png
+│       └── gameplay_scene.png
 │
 ├── Weekly-Progress/
 │   └── Week-01.md
@@ -172,22 +166,17 @@ CyberMaze/
 ### 1. Clone the Repository
 
 ```bash
-git clone YOUR_REPOSITORY_URL
+git clone https://github.com/Mst-setara-khatun/Cyber-Maze-Escape.git
+cd Cyber-Maze-Escape
 ```
 
-### 2. Navigate to the Project Directory
-
-```bash
-cd CyberMaze
-```
-
-### 3. Create a Virtual Environment
+### 2. Create a Virtual Environment
 
 ```bash
 python -m venv .venv
 ```
 
-### 4. Activate the Environment
+### 3. Activate the Environment
 
 For Windows PowerShell:
 
@@ -195,13 +184,13 @@ For Windows PowerShell:
 .\.venv\Scripts\Activate.ps1
 ```
 
-### 5. Install Pygame-CE
+### 4. Install Pygame-CE
 
 ```bash
 pip install pygame-ce
 ```
 
-### 6. Run the Game
+### 5. Run the Game
 
 ```bash
 python main.py
@@ -232,7 +221,7 @@ Completed tasks:
 - Added Start Game and Exit Game buttons.
 - Added animated background particles and cyber visual effects.
 
-**Next planned task:** Develop the first-person 3D-style maze environment using ray casting.
+**Next planned task:** Improve enemy AI, level design, sound effects, and complete final gameplay testing.
 
 [View Week 01 Progress Report](Weekly-Progress/Week-01.md)
 
@@ -245,6 +234,14 @@ Completed tasks:
 ### Gameplay Concept
 
 ![Gameplay Concept](Assets/Backgrounds/gameplay_concept.png)
+
+### Gameplay Reference
+
+![Gameplay Reference](Assets/Backgrounds/gameplay_reference.png)
+
+### Gameplay Scene
+
+![Gameplay Scene](Assets/Backgrounds/gameplay_scene.png)
 
 *These images are project visual assets and may not represent final gameplay screenshots.*
 
