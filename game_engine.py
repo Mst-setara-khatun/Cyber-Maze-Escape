@@ -1,4 +1,4 @@
-﻿import pygame
+import pygame
 import math
 import sys
 import random
@@ -56,6 +56,17 @@ class CyberMaze:
         self.health = 100
         self.score = 0
         self.elapsed = 0.0
+
+        self.game_over = False
+
+        self.enemy_x = 10 * TILE + 32
+        self.enemy_y = 1 * TILE + 32
+        self.enemy_min_x = 6 * TILE + 32
+        self.enemy_max_x = 12 * TILE + 32
+        self.enemy_speed = 75
+        self.enemy_direction = 1
+
+        self.damage_cooldown = 0.0
 
         self.font_small = pygame.font.SysFont("georgia", 17)
         self.font_medium = pygame.font.SysFont("georgia", 23, bold=True)
@@ -127,6 +138,8 @@ class CyberMaze:
 
         self.angle %= math.tau
 
+        self.update_enemy(dt)
+        self.check_enemy_collision(dt)
         self.collect_keys()
         self.elapsed += dt
 
@@ -145,6 +158,33 @@ class CyberMaze:
             self.mouse_locked = True
             pygame.event.set_grab(True)
             pygame.mouse.set_visible(False)
+
+    def update_enemy(self, dt):
+        self.enemy_x += self.enemy_direction * self.enemy_speed * dt
+
+        if self.enemy_x >= self.enemy_max_x:
+            self.enemy_x = self.enemy_max_x
+            self.enemy_direction = -1
+
+        elif self.enemy_x <= self.enemy_min_x:
+            self.enemy_x = self.enemy_min_x
+            self.enemy_direction = 1
+
+    def check_enemy_collision(self, dt):
+        if self.damage_cooldown > 0:
+            self.damage_cooldown -= dt
+
+        distance = math.hypot(
+            self.player_x - self.enemy_x,
+            self.player_y - self.enemy_y
+        )
+
+        if distance < 38 and self.damage_cooldown <= 0:
+            self.health = max(0, self.health - 20)
+            self.damage_cooldown = 1.0
+
+            if self.health <= 0:
+                self.game_over = True
 
     def collect_keys(self):
         for key in self.keys[:]:
@@ -504,13 +544,99 @@ class CyberMaze:
         )
         objects.append((distance, "portal", portal))
 
+        enemy = (self.enemy_x, self.enemy_y)
+        distance = math.hypot(
+            enemy[0] - self.player_x,
+            enemy[1] - self.player_y
+        )
+        objects.append((distance, "enemy", enemy))
+
         objects.sort(reverse=True)
 
         for _, kind, position in objects:
             if kind == "key":
                 self.draw_key_sprite(*position)
+            elif kind == "enemy":
+                self.draw_enemy_sprite(*position)
             else:
                 self.draw_portal()
+
+    def draw_enemy_sprite(self, x, y):
+        projected = self.project_object(x, y)
+
+        if projected is None:
+            return
+
+        screen_x, screen_y, size, distance = projected
+
+        radius = max(5, size // 10)
+        body_width = max(10, radius * 2)
+        body_height = max(15, size // 3)
+
+        # Red glowing aura
+        pygame.draw.circle(
+            self.screen,
+            (75, 12, 18),
+            (screen_x, screen_y - body_height // 2),
+            radius * 2
+        )
+
+        # Robot body
+        body = pygame.Rect(
+            screen_x - body_width // 2,
+            screen_y - body_height,
+            body_width,
+            body_height
+        )
+
+        pygame.draw.rect(
+            self.screen,
+            (115, 20, 30),
+            body,
+            border_radius=max(3, radius // 2)
+        )
+
+        pygame.draw.rect(
+            self.screen,
+            (235, 55, 65),
+            body,
+            max(1, radius // 5),
+            border_radius=max(3, radius // 2)
+        )
+
+        # Robot head
+        head_y = screen_y - body_height - radius
+
+        pygame.draw.circle(
+            self.screen,
+            (145, 25, 35),
+            (screen_x, head_y),
+            radius
+        )
+
+        pygame.draw.circle(
+            self.screen,
+            (255, 65, 65),
+            (screen_x, head_y),
+            max(2, radius // 2)
+        )
+
+        # Glowing eyes
+        eye_offset = max(2, radius // 3)
+
+        pygame.draw.circle(
+            self.screen,
+            (255, 230, 180),
+            (screen_x - eye_offset, head_y),
+            max(1, radius // 5)
+        )
+
+        pygame.draw.circle(
+            self.screen,
+            (255, 230, 180),
+            (screen_x + eye_offset, head_y),
+            max(1, radius // 5)
+        )
 
     def draw_hud(self):
         panel = pygame.Rect(VIEW_WIDTH, 0, HUD_WIDTH, HEIGHT)
@@ -726,6 +852,54 @@ class CyberMaze:
             score.get_rect(center=(VIEW_WIDTH // 2, 385))
         )
 
+    def draw_game_over(self):
+        overlay = pygame.Surface((VIEW_WIDTH, HEIGHT), pygame.SRCALPHA)
+        overlay.fill((18, 2, 5, 220))
+        self.screen.blit(overlay, (0, 0))
+
+        title = self.font_large.render(
+            "GAME OVER",
+            True,
+            (255, 65, 75)
+        )
+
+        message = self.font_medium.render(
+            "THE CYBER ENEMY DEFEATED YOU",
+            True,
+            WHITE
+        )
+
+        score = self.font_medium.render(
+            f"FINAL SCORE: {self.score}",
+            True,
+            PALE_GOLD
+        )
+
+        restart = self.font_medium.render(
+            "PRESS R TO RESTART",
+            True,
+            EMERALD
+        )
+
+        self.screen.blit(
+            title,
+            title.get_rect(center=(VIEW_WIDTH // 2, 230))
+        )
+
+        self.screen.blit(
+            message,
+            message.get_rect(center=(VIEW_WIDTH // 2, 300))
+        )
+
+        self.screen.blit(
+            score,
+            score.get_rect(center=(VIEW_WIDTH // 2, 360))
+        )
+
+        self.screen.blit(
+            restart,
+            restart.get_rect(center=(VIEW_WIDTH // 2, 425))
+        )
     def draw(self, dt):
         self.animation += dt
 
@@ -737,7 +911,9 @@ class CyberMaze:
         self.draw_hud()
         self.draw_crosshair()
 
-        if self.won:
+        if self.game_over:
+            self.draw_game_over()
+        elif self.won:
             self.draw_victory()
 
         pygame.display.update()

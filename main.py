@@ -1,4 +1,4 @@
-﻿import pygame
+import pygame
 import sys
 import math
 from pathlib import Path
@@ -153,7 +153,7 @@ def draw_panel():
         for i, line in enumerate(lines):
             draw_text_center(
                 line, font_text, WHITE,
-                (600, 275 + i * 24)
+                (600, 270 + i * 20)
             )
 
     elif active_panel == "settings":
@@ -324,6 +324,15 @@ while running:
                     pygame.mouse.set_visible(True)
                     pygame.event.set_grab(False)
 
+                elif event.key == pygame.K_r and game.game_over:
+                    game = CyberMaze(screen)
+                    game.mouse_locked = True
+                    game_started = True
+
+                    pygame.mouse.set_visible(False)
+                    pygame.event.set_grab(True)
+                    pygame.mouse.get_rel()
+
         else:
 
             if event.type == pygame.KEYDOWN:
@@ -399,7 +408,7 @@ while running:
                     if volume_rect.inflate(0, 25).collidepoint(event.pos):
                         handle_volume_click(event.pos[0])
 
-    if game_started and not game.won:
+    if game_started and not game.won and not game.game_over:
         game.movement(dt)
 
     pygame.display.flip()
