@@ -40,59 +40,58 @@ The player explores a mysterious cyber world, collects hidden keys, avoids dange
 
 The project focuses on fundamental computer graphics concepts, including ray casting, object projection, collision detection, animation, and interactive game mechanics.
 
-## 🌌 Game Overview
+Game Overview:
 
 The player starts inside a mysterious maze and must collect three hidden keys to reach the final escape portal.
 
 A moving cyber enemy patrols the maze and can damage the player upon collision. The player must manage their health, collect all keys, and reach the portal to win.
 
-## ✨ Key Features
+Key Features:
 
-### 🎨 Futuristic Main Menu
+Futuristic Main Menu
 - Cyberpunk-inspired interface.
 - Start, Help, Settings, About, and Exit options.
 - Animated background particles.
 - Background music and volume controls.
 
-### 🧱 3D-Style Maze Environment
+3D-Style Maze Environment
 - Ray casting-based environment rendering.
 - First-person perspective.
 - Wall rendering and depth-based visibility.
 - Dynamic object projection.
 
-### 🕹️ Player Movement
+ Player Movement
 - Forward and backward movement.
 - Left and right strafing.
 - Mouse-based camera control.
 - Wall collision detection.
 
-### 🔑 Key Collection System
+ Key Collection System
 - Three collectible keys.
 - Key collection detection.
 - Score rewards.
 - Collection progress display.
 
-### 🤖 Enemy System
+Enemy System
 - Moving enemy with patrol behavior.
 - Enemy sprite rendering.
 - Player-enemy collision detection.
 - Health reduction and damage cooldown.
 
-### ❤️ Health and HUD
+ Health and HUD
 - Player health display.
 - Key collection counter.
 - Score display.
 - Game timer.
 
-### 🌀 Victory and Game Over
+Victory and Game Over
 - Final portal and escape condition.
 - Victory screen.
 - Game Over screen.
 - Final score display.
 - Restart option after Game Over.
 
-## 🎯 Gameplay Objectives
-
+Gameplay Objectives
 1. Start the game from the main menu.
 2. Explore the maze.
 3. Collect all three keys.
