@@ -5,6 +5,7 @@
 **Course:** Computer Graphics and Multimedia System
 **Project Type:** Individual Game Development Project
 **Developer:** MST. SETARA KHATUN
+**Student ID:** 11230321387
 **Technology:** Python and Pygame-CE
 **Project Duration:** 6 Weeks
 
@@ -165,6 +166,8 @@ Through six weeks of development, the project will gradually introduce six major
 ---
 
 **Project:** Cyber Maze Escape  
-**Developer:** MST. SETARA KHATUN  
+**Developer:** MST. SETARA KHATUN
+**Student ID:** 11230321387  
 **Duration:** 6 Weeks
+
 
