@@ -10,7 +10,7 @@
 ![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey)
 ![Course](https://img.shields.io/badge/Course-Computer%20Graphics-purple)
 
-**Explore the maze · Solve cyber challenges · Escape to the next level**
+**Explore the maze Â· Solve cyber challenges Â· Escape to the next level**
 
 </div>
 
@@ -36,23 +36,18 @@
 
 The project combines real-time input handling, grid-based maze representation, collision detection, graphical user-interface elements, timed challenges, audio playback, and game-state management.
 
-## Visual Preview
 
 ### Main Menu
 
-![NEON SHADOWS Main Menu](Assets/Backgrounds/main_menu_design.png)
 
-### Additional Visual Concepts
 
 The following images are design and gameplay reference assets used during development; they are not presented as captured gameplay screenshots.
 
 | Cinematic Menu Direction | Gameplay Concept |
 |---|---|
-| ![Cinematic menu concept](Assets/Backgrounds/cinematic_menu.png) | ![Gameplay concept artwork](Assets/Backgrounds/gameplay_concept.png) |
 
 | Gameplay Reference | Gameplay Scene Reference |
 |---|---|
-| ![Gameplay reference artwork](Assets/Backgrounds/gameplay_reference.png) | ![Gameplay scene artwork](Assets/Backgrounds/gameplay_scene.png) |
 
 ## Gameplay
 
@@ -95,10 +90,10 @@ The game includes multiple levels, a score and lives system, and victory or game
 
 | Key | Action |
 |---|---|
-| `W` / `↑` | Move up |
-| `S` / `↓` | Move down |
-| `A` / `←` | Move left |
-| `D` / `→` | Move right |
+| `W` / `â†‘` | Move up |
+| `S` / `â†“` | Move down |
+| `A` / `â†` | Move left |
+| `D` / `â†’` | Move right |
 | `E` | Interact with cyber terminal |
 | `Enter` | Confirm / enter unlocked exit |
 | `Esc` | Back / return from a page |
@@ -117,25 +112,25 @@ The game includes multiple levels, a score and lives system, and victory or game
 
 ```text
 Cyber-Maze-Escape/
-├── Assets/
-│   ├── Backgrounds/
-│   │   ├── cinematic_menu.png
-│   │   ├── fantasy_music.wav
-│   │   ├── gameplay_concept.png
-│   │   ├── gameplay_reference.png
-│   │   ├── gameplay_scene.png
-│   │   └── main_menu_design.png
-│   └── University/
-│       └── nubtk_logo.png
-├── src/
-│   └── main.py
-├── Weekly-Progress/
-│   └── Week-01.md
-├── Cyber-Maze-Escape-Proposal.md
-├── create_proposal_pdf.py
-├── requirements.txt
-├── .gitignore
-└── README.md
+â”œâ”€â”€ Assets/
+â”‚   â”œâ”€â”€ Backgrounds/
+â”‚   â”‚   â”œâ”€â”€ cinematic_menu.png
+â”‚   â”‚   â”œâ”€â”€ fantasy_music.wav
+â”‚   â”‚   â”œâ”€â”€ gameplay_concept.png
+â”‚   â”‚   â”œâ”€â”€ gameplay_reference.png
+â”‚   â”‚   â”œâ”€â”€ gameplay_scene.png
+â”‚   â”‚   â””â”€â”€ main_menu_design.png
+â”‚   â””â”€â”€ University/
+â”‚       â””â”€â”€ nubtk_logo.png
+â”œâ”€â”€ src/
+â”‚   â””â”€â”€ main.py
+â”œâ”€â”€ Weekly-Progress/
+â”‚   â””â”€â”€ Week-01.md
+â”œâ”€â”€ Cyber-Maze-Escape-Proposal.md
+â”œâ”€â”€ create_proposal_pdf.py
+â”œâ”€â”€ requirements.txt
+â”œâ”€â”€ .gitignore
+â””â”€â”€ README.md
 ```
 
 ## Installation
@@ -173,12 +168,12 @@ python src/main.py
 
 ## Development Roadmap
 
-- [x] Week 01 — Project setup, proposal, repository and playable prototype
-- [ ] Week 02 — Gameplay refinement and environment improvements
-- [ ] Week 03 — Maze and player improvements
-- [ ] Week 04 — Gameplay mechanics and interactions
-- [ ] Week 05 — Enemy, scoring and visual-effect refinement
-- [ ] Week 06 — Testing, optimization and final presentation
+- [x] Week 01 â€” Project setup, proposal, repository and playable prototype
+- [ ] Week 02 â€” Gameplay refinement and environment improvements
+- [ ] Week 03 â€” Maze and player improvements
+- [ ] Week 04 â€” Gameplay mechanics and interactions
+- [ ] Week 05 â€” Enemy, scoring and visual-effect refinement
+- [ ] Week 06 â€” Testing, optimization and final presentation
 
 ## Documentation
 
@@ -202,7 +197,7 @@ python src/main.py
 
 <div align="center">
 
-**NEON SHADOWS — Every Maze Has an Exit.**
+**NEON SHADOWS â€” Every Maze Has an Exit.**
 
 Made for learning, creativity, and the love of game development.
 
