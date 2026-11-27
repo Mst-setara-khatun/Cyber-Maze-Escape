@@ -51,3 +51,12 @@ CyberMazeUnity/*.user
 
 # Local Unity backup - not part of the Pygame project
 CyberMazeUnity/
+
+# Temporary development scripts
+apply_design.py
+apply_visual_upgrade.py
+enable_homepage_music.py
+fix_gameplay.py
+make_green.py
+finalize_week1.py
+__pycache__/

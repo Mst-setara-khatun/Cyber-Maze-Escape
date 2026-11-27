@@ -1,4 +1,4 @@
-﻿# NEON SHADOWS: Escape the Cyber Maze
+# NEON SHADOWS: Escape the Cyber Maze
 
 ### A 2D Cyberpunk Maze Adventure Game
 
@@ -96,3 +96,4 @@ Gameplay screenshots will be added during development.
 ---
 
 *Developed as an academic Computer Graphics Lab project.*
+Get-Item "C:\CyberMaze\Assets\Backgrounds\main_menu_design.png" | Select-Object FullName, Length

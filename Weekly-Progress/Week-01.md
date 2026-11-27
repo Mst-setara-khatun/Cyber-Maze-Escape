@@ -1,45 +1,38 @@
-﻿# Week 01 - Project Planning and GitHub Setup
+# Week 01 - Project Planning and Initial Development
+
+## Project Information
+- Project: NEON SHADOWS: Escape the Cyber Maze
+- Course: Computer Graphics Lab
+- Developer: Mst. Setara Khatun
+- Student ID: 11230321387
+- Technology: Python 3 and Pygame CE
 
 ## Completed Tasks
-
-- Finalized the project title: NEON SHADOWS: Escape the Cyber Maze.
-- Selected Python 3 as the programming language.
-- Selected Pygame as the 2D game development library.
-- Finalized the project concept as a 2D cyberpunk maze adventure game.
+- Finalized project title and concept.
+- Selected Python and Pygame CE.
 - Prepared the project proposal.
-- Created and updated the GitHub repository.
-- Updated the README with project information, planned features and development roadmap.
-- Prepared the initial project documentation.
+- Created and configured the GitHub repository.
+- Prepared README and project documentation.
+- Created the initial game structure.
+- Developed an early playable game prototype.
 
-## Technologies Selected
+## Initial Prototype Features
+- Cyberpunk main menu and background music.
+- Procedurally generated maze.
+- Player movement and wall collision.
+- Interactive cyber terminal.
+- Computer science quiz challenges.
+- Countdown timer, lives and score.
+- Exit unlocking and level progression.
+- Victory and Game Over screens.
 
-- Python 3
-- Pygame
-- Visual Studio Code
-- Git
-- GitHub
+## Week 01 Status
+**COMPLETED**
 
-## Planned Game Features
+Project planning, documentation, GitHub setup and initial playable prototype have been completed.
 
-- 2D cyberpunk maze environment.
-- Player movement and navigation.
-- Maze walls and collision detection.
-- Collectible keys and locked exits.
-- Enemies and obstacles.
-- Score and timer system.
-- Background music and sound effects.
-- Victory and game-over screens.
-
-## Current Status
-
-Week 01 project planning and GitHub setup are in progress.
-
-The project proposal and initial documentation have been prepared. Actual game implementation has not started yet.
-
-## Next Week's Plan
-
-- Set up the Python and Pygame development environment.
-- Create the initial game window.
-- Configure the game screen and frame rate.
-- Prepare the initial game folder structure.
-- Start the basic game loop.
+## Next Week
+- Improve maze and gameplay design.
+- Refine player interactions.
+- Improve visual effects and interface.
+- Test existing gameplay mechanics.
