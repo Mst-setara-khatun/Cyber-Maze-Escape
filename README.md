@@ -1,99 +1,84 @@
 # NEON SHADOWS: Escape the Cyber Maze
 
-### A 2D Cyberpunk Maze Adventure Game
+### A Cyberpunk Maze Adventure Game
 
-**Explore the Maze | Collect Keys | Avoid Enemies | Find Your Escape**
+![Python](https://img.shields.io/badge/Python-3.14-blue?logo=python) ![Pygame](https://img.shields.io/badge/Pygame-CE-green) ![Status](https://img.shields.io/badge/Status-Playable%20Prototype-success)
 
-![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python) ![Pygame](https://img.shields.io/badge/Library-Pygame-green) ![Game](https://img.shields.io/badge/Game-2D%20Maze-purple) ![Status](https://img.shields.io/badge/Status-Planning-orange)
+## About
 
-## About the Project
+NEON SHADOWS is a Computer Graphics Lab project built with Python and Pygame. Explore procedurally generated mazes, solve computer science questions, unlock exits, and progress through multiple levels.
 
-NEON SHADOWS: Escape the Cyber Maze is an academic Computer Graphics Lab project. It aims to develop a 2D maze adventure game using Python and Pygame. Players will explore a cyber-themed maze, collect keys, avoid enemies, and find the exit.
+## Game Preview
 
-**Development Status:** Planning Stage
+![Main Menu](Assets/Backgrounds/main_menu_design.png)
 
-## Planned Features
+## Features
 
-- Cyberpunk-themed 2D environment
-- Player movement and maze navigation
-- Maze walls and collision detection
-- Collectible keys and locked exits
-- Enemies and obstacles
-- Score and timer system
-- Background music and sound effects
-- Main menu and pause menu
-- Victory and game-over screens
-- Multiple maze levels
+- Cyberpunk main menu and background music
+- Procedural maze generation
+- Player movement and wall collision
+- Computer Science quiz terminal
+- Countdown timer, lives and score
+- Multiple levels
+- Victory and Game Over screens
 
-
-## Technologies
-
-| Technology | Purpose |
-|---|---|
-| Python 3 | Programming Language |
-| Pygame | 2D Game Development |
-| VS Code | Code Editor |
-| Git | Version Control |
-| GitHub | Project Hosting |
-
-## Planned Controls
+## Controls
 
 | Key | Action |
 |---|---|
-| W / Up Arrow | Move Up |
-| S / Down Arrow | Move Down |
-| A / Left Arrow | Move Left |
-| D / Right Arrow | Move Right |
-| ESC | Pause |
+| WASD / Arrow Keys | Move |
+| E | Interact with terminal |
+| Enter | Confirm / Enter exit |
+| Esc | Back / Pause |
 
-*Controls may be adjusted during development.*
+## Installation
 
+Clone the repository and install the dependencies:
+
+```bash
+git clone https://github.com/Mst-setara-khatun/Cyber-Maze-Escape.git
+cd Cyber-Maze-Escape
+pip install -r requirements.txt
+python src/main.py
+```
 
 ## Project Structure
 
-``text
-NEON-SHADOWS/
-|-- assets/
-|   |-- backgrounds/
-|   |-- audio/
-|   |-- images/
-|-- src/
-|-- docs/
-|-- screenshots/
-|-- README.md
-|-- requirements.txt
-``
-
-*Planned structure; implementation will be added during development.*
+```text
+Cyber-Maze-Escape/
+├── Assets/
+│   ├── Backgrounds/
+│   └── University/
+├── src/
+│   └── main.py
+├── Weekly-Progress/
+│   └── Week-01.md
+├── Cyber-Maze-Escape-Proposal.md
+├── requirements.txt
+├── .gitignore
+└── README.md
+```
 
 ## Development Roadmap
 
-| Phase | Planned Work | Status |
-|---|---|---|
-| Week 01 | Project planning and GitHub setup | In Progress |
-| Week 02 | Pygame setup and game window | Planned |
-| Week 03 | Player movement and maze design | Planned |
-| Week 04 | Collision, keys and exit system | Planned |
-| Week 05 | Enemies, sound and scoring | Planned |
-| Week 06 | Testing and final presentation | Planned |
+- [x] Week 01 — Project setup and playable prototype
+- [ ] Week 02 — Gameplay improvements
+- [ ] Week 03 — Graphics and visual effects
+- [ ] Week 04 — Additional mechanics
+- [ ] Week 05 — Testing and optimization
+- [ ] Week 06 — Final presentation
 
-## Screenshots
+## Documentation
 
-Gameplay screenshots will be added during development.
-
-**Coming Soon...**
-
-## Academic Project
-
-**Course:** Computer Graphics Lab
-
-**Project:** NEON SHADOWS: Escape the Cyber Maze
+- [Project Proposal](Cyber-Maze-Escape-Proposal.md)
+- [Weekly Progress](Weekly-Progress/Week-01.md)
 
 ## Developer
 
-**Mst. Setara Khatun**
+**Mst. Setara Khatun**  
+**Student ID:** 11230321387  
+**Course:** Computer Graphics Lab
 
 ---
 
-*Developed as an academic Computer Graphics Lab project.*
-Get-Item "C:\CyberMaze\Assets\Backgrounds\main_menu_design.png" | Select-Object FullName, Length
+**NEON SHADOWS — Every Maze Has an Exit.**
