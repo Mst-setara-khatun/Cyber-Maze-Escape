@@ -1,83 +1,98 @@
-﻿# CYBER MAZE ESCAPE
-### A Futuristic 3D Maze Adventure Game
+﻿# NEON SHADOWS: Escape the Cyber Maze
 
-**Explore the Maze | Collect Keys | Defeat Enemies | Escape the Cyber World**
+### A 2D Cyberpunk Maze Adventure Game
 
-![Unity](https://img.shields.io/badge/Unity-6-black?logo=unity)
-![CSharp](https://img.shields.io/badge/Language-C%23-purple)
-![Platform](https://img.shields.io/badge/Platform-Windows-blue)
-![Status](https://img.shields.io/badge/Status-Under%20Development-orange)
+**Explore the Maze | Collect Keys | Avoid Enemies | Find Your Escape**
+
+![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python) ![Pygame](https://img.shields.io/badge/Library-Pygame-green) ![Game](https://img.shields.io/badge/Game-2D%20Maze-purple) ![Status](https://img.shields.io/badge/Status-Planning-orange)
 
 ## About the Project
 
-Cyber Maze Escape is an academic Computer Graphics Lab project. It is being developed as a futuristic 3D maze adventure game using Unity and C#.
+NEON SHADOWS: Escape the Cyber Maze is an academic Computer Graphics Lab project. It aims to develop a 2D maze adventure game using Python and Pygame. Players will explore a cyber-themed maze, collect keys, avoid enemies, and find the exit.
 
-The original Python/Pygame prototype is preserved as a legacy implementation. Unity is now the primary game development platform.
+**Development Status:** Planning Stage
 
-## Main Features
+## Planned Features
 
-- Futuristic Main Menu
-- 3D Maze Environment
-- First-Person Player Movement
-- Camera Control and Collision Detection
-- Collectible Keys and Locked Doors
-- Enemy AI and Boss Battles
-- Puzzles and Treasure
-- Health, Score and Timer
-- Victory and Game Over Screens
-- Three-Level Game Progression
+- Cyberpunk-themed 2D environment
+- Player movement and maze navigation
+- Maze walls and collision detection
+- Collectible keys and locked exits
+- Enemies and obstacles
+- Score and timer system
+- Background music and sound effects
+- Main menu and pause menu
+- Victory and game-over screens
+- Multiple maze levels
+
 
 ## Technologies
 
 | Technology | Purpose |
 |---|---|
-| Unity 6 | Game Engine |
-| C# | Programming Language |
-| Unity Built-in 3D | Rendering |
-| Visual Studio Code | Code Editing |
-| Git and GitHub | Version Control |
-| Blender | 3D Assets (Planned) |
+| Python 3 | Programming Language |
+| Pygame | 2D Game Development |
+| VS Code | Code Editor |
+| Git | Version Control |
+| GitHub | Project Hosting |
 
-## Six-Week Development Plan
+## Planned Controls
 
-| Week | Development Work |
+| Key | Action |
 |---|---|
-| Week 01 | Project Setup and Futuristic Main Menu |
-| Week 02 | 3D Maze Environment, Textures and Lighting |
-| Week 03 | Player Movement, Camera and Collision |
-| Week 04 | Keys, Doors, Puzzles and Enemy AI |
-| Week 05 | Health, HUD, Score, Timer and Sound |
-| Week 06 | Testing, Bug Fixing and Final Windows Build |
+| W / Up Arrow | Move Up |
+| S / Down Arrow | Move Down |
+| A / Left Arrow | Move Left |
+| D / Right Arrow | Move Right |
+| ESC | Pause |
+
+*Controls may be adjusted during development.*
+
 
 ## Project Structure
 
-- `CyberMazeUnity/` — Main Unity project
-- `Assets/` — Original project visual assets
-- `Weekly-Progress/` — Weekly development reports
-- `Cyber-Maze-Escape-Proposal.md` — Project proposal
-- `main.py` and `game_engine.py` — Legacy Python implementation
+``text
+NEON-SHADOWS/
+|-- assets/
+|   |-- backgrounds/
+|   |-- audio/
+|   |-- images/
+|-- src/
+|-- docs/
+|-- screenshots/
+|-- README.md
+|-- requirements.txt
+``
 
-## Development Status
+*Planned structure; implementation will be added during development.*
 
-The Unity project has been created. The initial 3D maze prototype and player controller script are under development. Features will be marked complete after implementation and testing.
+## Development Roadmap
 
-## Installation
+| Phase | Planned Work | Status |
+|---|---|---|
+| Week 01 | Project planning and GitHub setup | In Progress |
+| Week 02 | Pygame setup and game window | Planned |
+| Week 03 | Player movement and maze design | Planned |
+| Week 04 | Collision, keys and exit system | Planned |
+| Week 05 | Enemies, sound and scoring | Planned |
+| Week 06 | Testing and final presentation | Planned |
 
-1. Install Unity Hub and Unity 6.
-2. Clone this repository.
-3. Open Unity Hub.
-4. Add the `CyberMazeUnity` folder.
-5. Open the project.
+## Screenshots
 
-## Project Proposal
+Gameplay screenshots will be added during development.
 
-See [Cyber Maze Escape Project Proposal](Cyber-Maze-Escape-Proposal.md).
+**Coming Soon...**
+
+## Academic Project
+
+**Course:** Computer Graphics Lab
+
+**Project:** NEON SHADOWS: Escape the Cyber Maze
 
 ## Developer
 
-**MST. SETARA KHATUN**  
-Computer Science and Engineering  
-Northern University of Business and Technology Khulna
+**Mst. Setara Khatun**
 
-**Course:** Computer Graphics Lab  
-**Project Duration:** 6 Weeks
+---
+
+*Developed as an academic Computer Graphics Lab project.*

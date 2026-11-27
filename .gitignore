@@ -48,3 +48,6 @@ CyberMazeUnity/*.csproj
 CyberMazeUnity/*.sln
 CyberMazeUnity/*.slnx
 CyberMazeUnity/*.user
+
+# Local Unity backup - not part of the Pygame project
+CyberMazeUnity/

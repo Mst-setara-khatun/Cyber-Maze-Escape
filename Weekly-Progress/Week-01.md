@@ -1,34 +1,45 @@
-﻿# Week 01 - Project Setup and Initial Unity Prototype
+﻿# Week 01 - Project Planning and GitHub Setup
 
 ## Completed Tasks
 
-- Finalized Cyber Maze Escape as a 3D maze adventure game.
-- Selected Unity 6 and C# as the primary development technology.
-- Installed and configured Unity 6.
-- Created the Unity project structure.
-- Created folders for Scenes, Scripts, Materials, Models, Prefabs, Textures, Audio and UI.
-- Created the initial Level 1 greybox maze using Unity primitives.
-- Created the initial PlayerController C# script.
-- Configured GitHub version control for the Unity project.
-- Updated the project README.
+- Finalized the project title: NEON SHADOWS: Escape the Cyber Maze.
+- Selected Python 3 as the programming language.
+- Selected Pygame as the 2D game development library.
+- Finalized the project concept as a 2D cyberpunk maze adventure game.
+- Prepared the project proposal.
+- Created and updated the GitHub repository.
+- Updated the README with project information, planned features and development roadmap.
+- Prepared the initial project documentation.
 
-## Technologies Used
+## Technologies Selected
 
-- Unity 6
-- C#
-- Unity Built-in 3D Render Pipeline
+- Python 3
+- Pygame
 - Visual Studio Code
-- Git and GitHub
+- Git
+- GitHub
+
+## Planned Game Features
+
+- 2D cyberpunk maze environment.
+- Player movement and navigation.
+- Maze walls and collision detection.
+- Collectible keys and locked exits.
+- Enemies and obstacles.
+- Score and timer system.
+- Background music and sound effects.
+- Victory and game-over screens.
 
 ## Current Status
 
-Week 01 is in progress.
+Week 01 project planning and GitHub setup are in progress.
 
-The Unity project and initial Level 1 prototype have been created. Player movement and gameplay systems still require implementation and testing.
+The project proposal and initial documentation have been prepared. Actual game implementation has not started yet.
 
 ## Next Week's Plan
 
-- Improve the 3D maze environment.
-- Design maze walls, floors and obstacles.
-- Add materials, textures and lighting.
-- Prepare the first playable maze scene.
+- Set up the Python and Pygame development environment.
+- Create the initial game window.
+- Configure the game screen and frame rate.
+- Prepare the initial game folder structure.
+- Start the basic game loop.

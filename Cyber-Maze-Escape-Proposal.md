@@ -1,174 +1,173 @@
-﻿# CYBER MAZE ESCAPE
-## A 3D Maze Adventure Game
+﻿# NEON SHADOWS: Escape the Cyber Maze
+## A 2D Cyberpunk Maze Adventure Game
 ### Project Proposal
 
-**Course:** Computer Graphics and Multimedia System
+**Course:** Computer Graphics Lab
 **Project Type:** Individual Game Development Project
 **Developer:** MST. SETARA KHATUN
 **Student ID:** 11230321387
-**Technology:** Unity 6 and C#
+**Technology:** Python 3 and Pygame
 **Project Duration:** 6 Weeks
 
 ---
 
 ## 1. Introduction
 
-Cyber Maze Escape is a futuristic 3D-style maze adventure game developed using Unity 6 and C#.
+NEON SHADOWS: Escape the Cyber Maze is a 2D maze adventure game planned to be developed using Python and Pygame.
 
-The game places players inside a mysterious futuristic cyber environment where they must explore complex mazes, overcome obstacles, collect keys, unlock doors and find the final escape route.
+Players will explore a futuristic cyberpunk maze, collect keys, avoid enemies and find the final exit.
 
-The project focuses on computer graphics concepts, interactive gameplay, player movement, collision detection and visual effects.
+The project will demonstrate computer graphics concepts through 2D rendering, sprite movement, collision detection, animation and interactive gameplay.
 
 ## 2. Project Background and Motivation
 
-Maze games are an interesting way to demonstrate navigation, spatial awareness and interactive computer graphics.
+Maze games provide an effective way to demonstrate navigation, spatial awareness and interactive graphics.
 
-The motivation behind this project is to develop an engaging futuristic maze adventure game that demonstrates practical applications of computer graphics concepts through an interactive gaming experience.
+The motivation behind this project is to develop an engaging 2D cyberpunk maze game that combines computer graphics concepts with an interactive gaming experience.
 
 ## 3. Problem Statement
 
-Players need to navigate through a challenging maze environment while avoiding obstacles and finding the correct escape route.
+Players must navigate through a challenging maze, collect required items and avoid obstacles to reach the exit.
 
-The game will provide an interactive environment where players must use navigation skills, solve challenges and complete objectives within the game.
+The game will provide an interactive environment where players must make decisions and complete objectives within the available time.
 
 ## 4. Project Objectives
 
-- Develop a visually attractive futuristic maze adventure game.
-- Implement a first-person 3D-style maze environment.
-- Provide smooth player movement and collision detection.
-- Implement interactive keys and locked doors.
-- Add scoring, timer and game status information.
-- Develop a complete game experience with winning and losing conditions.
+- Develop a visually attractive 2D cyberpunk maze game.
+- Implement smooth 2D player movement.
+- Design maze walls and collision detection.
+- Implement collectible keys and locked exits.
+- Add enemies and obstacles.
+- Develop a scoring and timer system.
+- Create victory and game-over conditions.
 
 ## 5. Game Concept and Story
 
-The player enters a mysterious cyber facility that has been locked by an unknown security system.
+The player becomes trapped inside a mysterious cyber facility controlled by an unknown security system.
 
-To escape, the player must explore the maze, discover hidden keys, unlock restricted doors and reach the final exit.
-
-Each challenge is designed to make the adventure more interesting and engaging.
+To escape, the player must explore the maze, discover hidden keys, avoid dangerous enemies and reach the final exit.
 
 ## 6. Gameplay Description
 
-The game starts with a futuristic main menu.
+The game will start with a futuristic main menu.
 
-After selecting Start Game, the player enters a first-person 3D-style maze environment.
+After selecting Start Game, the player will enter a 2D cyberpunk maze environment.
 
-The player explores the maze using keyboard controls, collects required keys and unlocks doors.
+The player will navigate using keyboard controls, collect keys and unlock the exit.
 
-The player must reach the final exit before the timer runs out.
+Enemies and obstacles will make navigation more challenging. A timer and scoring system will track gameplay progress.
 
-Successful completion displays a winning screen, while failure displays a game-over screen.
+Reaching the exit successfully will display a victory screen, while failing will display a game-over screen.
 
 ## 7. Main Features
 
 ### Feature 1: Futuristic Main Menu
-- Professional cyberpunk-style interface.
-- Animated background and neon visual effects.
-- Start Game and Exit Game buttons.
-- Consistent futuristic design.
+- Cyberpunk-themed interface.
+- Start Game and Exit Game options.
+- Attractive background and visual effects.
 
-### Feature 2: 3D Maze Environment
-- First-person 3D-style maze rendering using ray casting.
-- Futuristic wall and floor design.
-- Neon lighting and visual effects.
-- Maze navigation environment.
+### Feature 2: 2D Maze Environment
+- 2D maze design.
+- Cyberpunk-inspired environment.
+- Walls, paths and restricted areas.
+- Multiple maze levels (planned).
 
 ### Feature 3: Player Movement
-- Keyboard-based player movement.
-- Forward, backward and sideways movement.
-- Camera rotation.
-- Wall collision detection to prevent passing through walls.
+- Keyboard-based movement.
+- Four-directional player movement.
+- Smooth sprite movement.
+- Wall collision detection.
 
-### Feature 4: Key and Door System
-- Collectible keys placed inside the maze.
-- Locked doors that require keys.
-- Interactive door unlocking.
-- Access to restricted maze areas.
+### Feature 4: Key and Exit System
+- Collectible keys inside the maze.
+- Locked exits requiring keys.
+- Interactive key collection.
+- Exit unlocking mechanism.
 
-### Feature 5: Game HUD and Scoring
+### Feature 5: Enemies and Obstacles
+- Enemies placed inside the maze.
+- Obstacles that challenge navigation.
+- Collision-based gameplay interactions.
+
+### Feature 6: Game HUD and Scoring
 - Player score display.
 - Countdown timer.
-- Current level information.
 - Key collection status.
-- Game progress information.
+- Current level information.
 
-### Feature 6: Game Completion System
-- Winning screen after reaching the exit.
+### Feature 7: Game Completion System
+- Victory screen after reaching the exit.
 - Game-over screen when the player fails.
-- Restart and return-to-menu options.
+- Restart and menu options.
 - Background music and sound effects.
 
 ## 8. Game Rules and Objectives
 
 1. The player must explore the maze.
-2. The player must find the required keys.
-3. Locked doors must be opened using keys.
-4. The player must avoid obstacles.
-5. The player must reach the final exit before time expires.
-6. Completing the maze successfully results in victory.
+2. The player must collect the required keys.
+3. The player must unlock the exit.
+4. The player must avoid enemies and obstacles.
+5. The player should reach the exit before time expires.
+6. Successful completion results in victory.
 
 ## 9. Game Controls
 
 | Key | Action |
 |---|---|
-| W | Move Forward |
-| S | Move Backward |
-| A | Move Left |
-| D | Move Right |
-| Mouse | Camera Control (planned) |
-| ESC | Pause or Return to Menu |
+| W / Up Arrow | Move Up |
+| S / Down Arrow | Move Down |
+| A / Left Arrow | Move Left |
+| D / Right Arrow | Move Right |
+| ESC | Pause Game |
+
+*Controls are planned and may be adjusted during development.*
 
 ## 10. Graphics and Visual Design
 
 The game will follow a futuristic cyberpunk visual style.
 
 The design will include:
-- Dark navy and black backgrounds.
-- Neon cyan, electric blue and purple lighting.
-- Glowing interface elements.
-- Animated particles and visual effects.
-- First-person 3D-style maze rendering.
-
-All game screens will maintain a consistent visual design.
+- Dark backgrounds and futuristic environments.
+- Neon cyan, electric blue and purple visual elements.
+- 2D sprites and graphical objects.
+- Animated player movement.
+- Visual feedback for keys, enemies and exits.
+- A consistent graphical interface.
 
 ## 11. Technologies and Tools
 
-- Programming Language: C#
-- Game Engine: Unity 6
-- Graphics Technique: Ray Casting
+- Programming Language: Python 3
+- Game Development Library: Pygame
 - Development Environment: Visual Studio Code
-- Version Control: Git and GitHub
+- Version Control: Git
+- Project Hosting: GitHub
 
 ## 12. Six-Week Development Timeline
 
 | Week | Feature | Planned Work |
 |---|---|---|
-| Week 1 | Futuristic Main Menu | Project setup and interactive main menu |
-| Week 2 | 3D Maze Environment | Maze design and ray-casting renderer |
-| Week 3 | Player Movement | Movement, camera and collision detection |
-| Week 4 | Key and Door System | Key collection and door unlocking |
-| Week 5 | Game HUD and Scoring | Timer, score and game information |
-| Week 6 | Game Completion System | Win/lose screens, restart and sound effects |
+| Week 1 | Project Planning | Project proposal and GitHub setup |
+| Week 2 | Game Setup | Pygame installation and game window |
+| Week 3 | Maze and Player | Maze design and player movement |
+| Week 4 | Collision and Keys | Collision detection, keys and exit system |
+| Week 5 | Enemies and Scoring | Enemies, timer, score and sound |
+| Week 6 | Final Game | Testing, improvement and presentation |
 
 ## 13. Expected Outcomes
 
-The expected outcome is a complete and interactive futuristic 3D-style maze adventure game.
+The expected outcome is a complete and interactive 2D cyberpunk maze adventure game.
 
-The final game will demonstrate practical computer graphics concepts, interactive controls, maze navigation, collision detection and game development techniques.
+The project will demonstrate practical computer graphics concepts, including 2D rendering, sprite animation, player movement, collision detection and interactive game development.
 
 ## 14. Conclusion
 
-Cyber Maze Escape aims to combine computer graphics concepts with an engaging futuristic gaming experience.
+NEON SHADOWS: Escape the Cyber Maze aims to combine computer graphics concepts with an engaging 2D gaming experience.
 
-Through six weeks of development, the project will gradually introduce six major features and deliver a visually consistent and interactive maze adventure game.
+The project will be developed progressively over six weeks using Python and Pygame, with the goal of delivering a functional and visually appealing maze adventure game.
 
 ---
 
-**Project:** Cyber Maze Escape  
+**Project:** NEON SHADOWS: Escape the Cyber Maze
 **Developer:** MST. SETARA KHATUN
-**Student ID:** 11230321387  
+**Student ID:** 11230321387
 **Duration:** 6 Weeks
-
-
-
