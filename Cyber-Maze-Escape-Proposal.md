@@ -6,14 +6,14 @@
 **Project Type:** Individual Game Development Project
 **Developer:** MST. SETARA KHATUN
 **Student ID:** 11230321387
-**Technology:** Python and Pygame-CE
+**Technology:** Unity 6 and C#
 **Project Duration:** 6 Weeks
 
 ---
 
 ## 1. Introduction
 
-Cyber Maze Escape is a futuristic 3D-style maze adventure game developed using Python and Pygame-CE.
+Cyber Maze Escape is a futuristic 3D-style maze adventure game developed using Unity 6 and C#.
 
 The game places players inside a mysterious futuristic cyber environment where they must explore complex mazes, overcome obstacles, collect keys, unlock doors and find the final escape route.
 
@@ -134,8 +134,8 @@ All game screens will maintain a consistent visual design.
 
 ## 11. Technologies and Tools
 
-- Programming Language: Python
-- Game Development Library: Pygame-CE
+- Programming Language: C#
+- Game Engine: Unity 6
 - Graphics Technique: Ray Casting
 - Development Environment: Visual Studio Code
 - Version Control: Git and GitHub
@@ -169,5 +169,6 @@ Through six weeks of development, the project will gradually introduce six major
 **Developer:** MST. SETARA KHATUN
 **Student ID:** 11230321387  
 **Duration:** 6 Weeks
+
 
 

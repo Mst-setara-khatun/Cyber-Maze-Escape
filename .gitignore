@@ -34,3 +34,17 @@ Assets/Models/
 # Experimental source and preview files
 game_engine_source.txt
 preview_compatible.py
+
+# Unity generated files
+CyberMazeUnity/[Ll]ibrary/
+CyberMazeUnity/[Tt]emp/
+CyberMazeUnity/[Oo]bj/
+CyberMazeUnity/[Ll]ogs/
+CyberMazeUnity/[Bb]uild/
+CyberMazeUnity/[Bb]uilds/
+CyberMazeUnity/[Mm]emoryCaptures/
+CyberMazeUnity/[Uu]ser[Ss]ettings/
+CyberMazeUnity/*.csproj
+CyberMazeUnity/*.sln
+CyberMazeUnity/*.slnx
+CyberMazeUnity/*.user

@@ -65,8 +65,14 @@ class CyberMaze:
         self.enemy_max_x = 12 * TILE + 32
         self.enemy_speed = 75
         self.enemy_direction = 1
+        self.enemy_animation_time = 0.0
 
         self.damage_cooldown = 0.0
+
+        # Enemy attack impact visual effects
+        self.screen_shake = 0.0
+        self.red_flash_timer = 0.0
+        self.red_flash_alpha = 0
 
         self.font_small = pygame.font.SysFont("georgia", 17)
         self.font_medium = pygame.font.SysFont("georgia", 23, bold=True)
@@ -160,8 +166,33 @@ class CyberMaze:
             pygame.mouse.set_visible(False)
 
     def update_enemy(self, dt):
-        self.enemy_x += self.enemy_direction * self.enemy_speed * dt
+        self.enemy_animation_time += dt
 
+        # Calculate distance from enemy to player
+        distance = math.hypot(
+            self.player_x - self.enemy_x,
+            self.player_y - self.enemy_y
+        )
+
+        # Chase only when the player is nearby
+        # and is in approximately the same corridor
+        if (
+            distance < TILE * 4
+            and abs(self.player_y - self.enemy_y) < TILE * 1.25
+        ):
+            if abs(self.player_x - self.enemy_x) > 3:
+                self.enemy_direction = (
+                    1 if self.player_x > self.enemy_x else -1
+                )
+
+            speed = self.enemy_speed * 1.35
+        else:
+            # Normal patrol mode
+            speed = self.enemy_speed
+
+        self.enemy_x += self.enemy_direction * speed * dt
+
+        # Keep enemy inside its patrol area
         if self.enemy_x >= self.enemy_max_x:
             self.enemy_x = self.enemy_max_x
             self.enemy_direction = -1
@@ -182,6 +213,11 @@ class CyberMaze:
         if distance < 38 and self.damage_cooldown <= 0:
             self.health = max(0, self.health - 20)
             self.damage_cooldown = 1.0
+
+            # Trigger attack impact effects
+            self.screen_shake = 0.35
+            self.red_flash_timer = 0.25
+            self.red_flash_alpha = 150
 
             if self.health <= 0:
                 self.game_over = True
@@ -569,73 +605,240 @@ class CyberMaze:
 
         screen_x, screen_y, size, distance = projected
 
-        radius = max(5, size // 10)
-        body_width = max(10, radius * 2)
-        body_height = max(15, size // 3)
+        cx = int(round(screen_x))
+        feet_y = int(round(screen_y))
 
-        # Red glowing aura
-        pygame.draw.circle(
-            self.screen,
-            (75, 12, 18),
-            (screen_x, screen_y - body_height // 2),
-            radius * 2
+        # Perspective-based human proportions
+        head_r = max(3, int(size * 0.09))
+        torso_w = max(8, int(size * 0.30))
+        torso_h = max(10, int(size * 0.32))
+        leg_h = max(8, int(size * 0.25))
+        arm_w = max(2, int(size * 0.07))
+        leg_w = max(2, int(size * 0.09))
+
+        shoulder_y = feet_y - leg_h - torso_h
+        head_y = shoulder_y - head_r - max(2, int(size * 0.025))
+        neck_h = max(2, int(size * 0.06))
+
+        # Detect nearby player for attack animation
+        enemy_distance = math.hypot(
+            self.player_x - x,
+            self.player_y - y
+        )
+        is_attacking = enemy_distance < 90
+
+        attack_pulse = abs(
+            math.sin(self.enemy_animation_time * 12.0)
         )
 
-        # Robot body
+        # Red aura becomes stronger during attack
+        aura_color = (
+            (255, 25, 35) if is_attacking else (65, 8, 15)
+        )
+        aura_radius = max(
+            5,
+            int(size * (0.48 + attack_pulse * 0.10))
+        )
+
+        pygame.draw.circle(
+            self.screen,
+            aura_color,
+            (cx, feet_y - int(size * 0.45)),
+            aura_radius
+        )
+
+        # Walking animation: alternating legs and body movement
+        walk_phase = math.sin(self.enemy_animation_time * 8.0)
+        leg_swing = int(walk_phase * max(2, int(size * 0.07)))
+        body_bob = int(abs(walk_phase) * max(1, int(size * 0.015)))
+
+        shoulder_y -= body_bob
+        head_y -= body_bob
+
+        hip_y = shoulder_y + torso_h - max(2, int(size * 0.04))
+        left_hip = (cx - torso_w // 4, hip_y)
+        right_hip = (cx + torso_w // 4, hip_y)
+
+        left_foot = (cx - torso_w // 3 + leg_swing, feet_y)
+        right_foot = (cx + torso_w // 3 - leg_swing, feet_y)
+
+        pygame.draw.line(
+            self.screen, (65, 12, 22),
+            left_hip, left_foot, leg_w + 2
+        )
+        pygame.draw.line(
+            self.screen, (65, 12, 22),
+            right_hip, right_foot, leg_w + 2
+        )
+
+        pygame.draw.line(
+            self.screen, (190, 35, 48),
+            left_hip, left_foot, leg_w
+        )
+        pygame.draw.line(
+            self.screen, (190, 35, 48),
+            right_hip, right_foot, leg_w
+        )
+
+        # Futuristic boots
+        boot_w = max(4, int(size * 0.13))
+        boot_h = max(3, int(size * 0.055))
+
+        pygame.draw.rect(
+            self.screen, (35, 12, 18),
+            (left_foot[0] - boot_w // 2, feet_y - boot_h,
+             boot_w, boot_h),
+            border_radius=max(1, boot_h // 3)
+        )
+        pygame.draw.rect(
+            self.screen, (35, 12, 18),
+            (right_foot[0] - boot_w // 2, feet_y - boot_h,
+             boot_w, boot_h),
+            border_radius=max(1, boot_h // 3)
+        )
+
+        # Arms and shoulders
+        shoulder_left = (cx - torso_w // 2, shoulder_y + max(2, torso_h // 7))
+        shoulder_right = (cx + torso_w // 2, shoulder_y + max(2, torso_h // 7))
+
+        hand_y = shoulder_y + torso_h // 2
+        arm_swing = int(walk_phase * max(2, int(size * 0.055)))
+
+        if is_attacking:
+            # Extend both arms during the attack
+            attack_reach = int(
+                (0.5 + 0.5 * attack_pulse) * max(3, int(size * 0.12))
+            )
+            hand_y += max(1, int(size * 0.035))
+
+            left_hand = (
+                cx - torso_w // 2 - max(2, int(size * 0.09))
+                - attack_reach,
+                hand_y
+            )
+            right_hand = (
+                cx + torso_w // 2 + max(2, int(size * 0.09))
+                + attack_reach,
+                hand_y
+            )
+        else:
+            left_hand = (
+                cx - torso_w // 2 - max(2, int(size * 0.09)) - arm_swing,
+                hand_y
+            )
+            right_hand = (
+                cx + torso_w // 2 + max(2, int(size * 0.09)) + arm_swing,
+                hand_y
+            )
+
+        pygame.draw.line(
+            self.screen, (65, 12, 22),
+            shoulder_left, left_hand, arm_w + 3
+        )
+        pygame.draw.line(
+            self.screen, (65, 12, 22),
+            shoulder_right, right_hand, arm_w + 3
+        )
+
+        pygame.draw.line(
+            self.screen, (180, 35, 48),
+            shoulder_left, left_hand, arm_w
+        )
+        pygame.draw.line(
+            self.screen, (180, 35, 48),
+            shoulder_right, right_hand, arm_w
+        )
+
+        # Hands
+        hand_r = max(2, arm_w // 2)
+        pygame.draw.circle(self.screen, (100, 22, 30), left_hand, hand_r)
+        pygame.draw.circle(self.screen, (100, 22, 30), right_hand, hand_r)
+
+        # Human torso armor
         body = pygame.Rect(
-            screen_x - body_width // 2,
-            screen_y - body_height,
-            body_width,
-            body_height
+            cx - torso_w // 2,
+            shoulder_y,
+            torso_w,
+            torso_h
         )
 
         pygame.draw.rect(
-            self.screen,
-            (115, 20, 30),
-            body,
-            border_radius=max(3, radius // 2)
+            self.screen, (65, 12, 22), body,
+            border_radius=max(2, torso_w // 5)
+        )
+
+        inner_body = body.inflate(
+            -max(2, torso_w // 5),
+            -max(2, torso_h // 7)
         )
 
         pygame.draw.rect(
-            self.screen,
-            (235, 55, 65),
-            body,
-            max(1, radius // 5),
-            border_radius=max(3, radius // 2)
+            self.screen, (175, 28, 42), inner_body,
+            border_radius=max(2, torso_w // 7)
         )
 
-        # Robot head
-        head_y = screen_y - body_height - radius
-
-        pygame.draw.circle(
-            self.screen,
-            (145, 25, 35),
-            (screen_x, head_y),
-            radius
+        # Chest armor details
+        pygame.draw.line(
+            self.screen, (255, 90, 85),
+            (cx, shoulder_y + torso_h // 5),
+            (cx, shoulder_y + torso_h * 3 // 4),
+            max(1, int(size * 0.025))
         )
 
+        pygame.draw.line(
+            self.screen, (255, 170, 100),
+            (cx - torso_w // 4, shoulder_y + torso_h // 3),
+            (cx + torso_w // 4, shoulder_y + torso_h // 3),
+            max(1, int(size * 0.025))
+        )
+
+        # Neck
+        neck_w = max(3, head_r)
+        pygame.draw.rect(
+            self.screen, (100, 25, 32),
+            (cx - neck_w // 2, head_y + head_r,
+             neck_w, neck_h)
+        )
+
+        # Human-shaped armored head
         pygame.draw.circle(
-            self.screen,
-            (255, 65, 65),
-            (screen_x, head_y),
-            max(2, radius // 2)
+            self.screen, (75, 18, 27),
+            (cx, head_y), head_r + 1
+        )
+        pygame.draw.circle(
+            self.screen, (165, 45, 52),
+            (cx, head_y), head_r
+        )
+
+        # Helmet forehead
+        pygame.draw.arc(
+            self.screen, (255, 85, 75),
+            (cx - head_r, head_y - head_r,
+             head_r * 2, head_r * 2),
+            0, 3.14, max(1, head_r // 4)
         )
 
         # Glowing eyes
-        eye_offset = max(2, radius // 3)
+        eye_offset = max(1, head_r // 3)
+        eye_r = max(1, head_r // 6)
 
         pygame.draw.circle(
-            self.screen,
-            (255, 230, 180),
-            (screen_x - eye_offset, head_y),
-            max(1, radius // 5)
+            self.screen, (255, 235, 190),
+            (cx - eye_offset, head_y), eye_r
+        )
+        pygame.draw.circle(
+            self.screen, (255, 235, 190),
+            (cx + eye_offset, head_y), eye_r
         )
 
+        # Red eye glow
         pygame.draw.circle(
-            self.screen,
-            (255, 230, 180),
-            (screen_x + eye_offset, head_y),
-            max(1, radius // 5)
+            self.screen, (255, 45, 55),
+            (cx - eye_offset, head_y), max(1, eye_r // 2)
+        )
+        pygame.draw.circle(
+            self.screen, (255, 45, 55),
+            (cx + eye_offset, head_y), max(1, eye_r // 2)
         )
 
     def draw_hud(self):
@@ -903,6 +1106,10 @@ class CyberMaze:
     def draw(self, dt):
         self.animation += dt
 
+        # Update impact effect timers
+        self.screen_shake = max(0.0, self.screen_shake - dt)
+        self.red_flash_timer = max(0.0, self.red_flash_timer - dt)
+
         self.draw_environment()
         self.cast_rays()
         self.draw_objects()
@@ -916,4 +1123,37 @@ class CyberMaze:
         elif self.won:
             self.draw_victory()
 
+        # Screen shake affects only the game viewport
+        if self.screen_shake > 0:
+            shake_strength = int(7 * self.screen_shake / 0.35)
+
+            shake_x = int(
+                math.sin(self.animation * 75) * shake_strength
+            )
+            shake_y = int(
+                math.cos(self.animation * 90) * shake_strength
+            )
+
+            viewport = self.screen.subsurface(
+                (0, 0, VIEW_WIDTH, HEIGHT)
+            ).copy()
+
+            self.screen.fill((0, 0, 0), (0, 0, VIEW_WIDTH, HEIGHT))
+            self.screen.blit(viewport, (shake_x, shake_y))
+
+        # Red flash when the player receives damage
+        if self.red_flash_timer > 0:
+            flash_alpha = int(
+                150 * self.red_flash_timer / 0.25
+            )
+
+            flash = pygame.Surface(
+                (VIEW_WIDTH, HEIGHT),
+                pygame.SRCALPHA
+            )
+            flash.fill((255, 0, 25, flash_alpha))
+            self.screen.blit(flash, (0, 0))
+
         pygame.display.update()
+
+
